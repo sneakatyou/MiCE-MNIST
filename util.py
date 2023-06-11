@@ -4,7 +4,7 @@ from models.resnet_MiCE import ResNet34
 from models.resnet_cifar_MiCE import ResNet34_cifar
 import numpy as np
 from sklearn.metrics import normalized_mutual_info_score, adjusted_rand_score
-from sklearn.utils.linear_assignment_ import linear_assignment
+from scipy.optimize import linear_sum_assignment as linear_assignment
 
 nmi = normalized_mutual_info_score
 ari = adjusted_rand_score
