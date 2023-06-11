@@ -37,6 +37,11 @@ def get_dataset_stat(dataset):
         mean = [0.4409, 0.4279, 0.3868]
         std = [0.2683, 0.2610, 0.2687]
         n_class = 10
+    elif dataset == 'mnist':
+        image_size = 28
+        mean = [0.1307,0.1307,0.1307]
+        std = [0.3081,0.3081,0.3081]
+        n_class = 10
 
     return image_size, mean, std, n_class
 
@@ -61,6 +66,9 @@ def create_dataset(dataset, train_transform, test_transform):
     elif dataset == 'stl10':
         train_dataset = datasets.STL10(root='./data', split='train', download=True, transform=train_transform, )
         test_dataset = datasets.STL10(root='./data', split='test', download=True, transform=test_transform, )
+    elif dataset == 'mnist':
+        train_dataset = datasets.MNIST(root='./data', split='train', download=True, transform=train_transform, )
+        test_dataset = datasets.MNIST(root='./data', split='test', download=True, transform=test_transform, )
 
     return train_dataset, test_dataset
 
