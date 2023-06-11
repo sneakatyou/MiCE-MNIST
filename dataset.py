@@ -66,6 +66,7 @@ def create_dataset(dataset, train_transform, test_transform):
     elif dataset == 'stl10':
         train_dataset = datasets.STL10(root='./data', split='train', download=True, transform=train_transform, )
         test_dataset = datasets.STL10(root='./data', split='test', download=True, transform=test_transform, )
+    
     elif dataset == 'mnist':
         train_dataset = datasets.MNIST(root='./data', download=True, transform=train_transform, )
         test_dataset = datasets.MNIST(root='./data', download=True, transform=test_transform, )
@@ -89,6 +90,7 @@ class ImageFolderTripple(datasets.ImageFolder):
         """
         path, target = self.imgs[index]
         image = self.loader(path)
+
         if self.transform is not None:
             img = self.transform(image)
         if self.target_transform is not None:

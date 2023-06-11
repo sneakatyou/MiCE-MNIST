@@ -12,7 +12,7 @@ from util import *
 from ELBO import MiCE_ELBO
 from dataset import get_dataset_stat, create_dataset
 from torch.utils.data import ConcatDataset
-
+import torchvision
 
 def parse_option():
     parser = argparse.ArgumentParser('argument for training')
@@ -91,14 +91,27 @@ def main():
     args.n_class = n_class
     normalize = transforms.Normalize(mean=mean, std=std)
 
-    train_transform = transforms.Compose([
+    if args.dataset == "mnist":
+        print("1")
+        train_transform = transforms.Compose([
+        torchvision.transforms.Grayscale(num_output_channels=3),
         transforms.RandomResizedCrop(image_size, scale=(0.2, 1.)),
         transforms.RandomGrayscale(p=0.2),
         transforms.ColorJitter(0.4, 0.4, 0.4, 0.4),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         normalize
-    ])
+        ])
+
+    else:
+        train_transform = transforms.Compose([
+            transforms.RandomResizedCrop(image_size, scale=(0.2, 1.)),
+            transforms.RandomGrayscale(p=0.2),
+            transforms.ColorJitter(0.4, 0.4, 0.4, 0.4),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            normalize
+        ])
 
     train_dataset, test_dataset = create_dataset(args.dataset, train_transform, train_transform)
     full_dataset = ConcatDataset([train_dataset, test_dataset])
