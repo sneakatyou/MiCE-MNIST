@@ -66,7 +66,8 @@ def parse_option():
 
     opt.model_name = '{}_nu{}_{}_lr{}_bsz{}_epoch{}_tau{}'.format(opt.dataset, opt.nu, opt.model,
                                                         opt.learning_rate,opt.batch_size, opt.epochs, opt.tau)
-    opt.model_name += opt.suffix
+    if opt.suffix is not None:
+        opt.model_name += opt.suffix
 
     opt.model_folder = os.path.join(opt.model_path, opt.model_name)
     if not os.path.isdir(opt.model_folder):
