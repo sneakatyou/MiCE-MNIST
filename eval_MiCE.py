@@ -22,7 +22,7 @@ def parse_option():
     parser.add_argument('--num_workers', type=int, default=32, help='num of workers to use')
 
     # dataset
-    parser.add_argument('--dataset', type=str, default='cifar10', choices=['cifar10', 'cifar20', 'stl10'])
+    parser.add_argument('--dataset', type=str, default='cifar10', choices=['mnist','cifar10', 'cifar20', 'stl10'])
 
     # resume
     parser.add_argument('--resume', default='', type=str, metavar='PATH',
